@@ -1997,7 +1997,7 @@ var flagofele = 1;
             suffix = this.lengthUnitDisplay.code;
           }
           if (flagofele) {
-            distance = distance * 25.67;
+            distance = distance * 20.7;
           } else {
             distance = distance * 55.56;
           }
@@ -2110,7 +2110,7 @@ var flagofele = 1;
             suffix = this.lengthUnitDisplay.code;
           }
           if (flagofele) {
-            height = height * 25.67;
+            height = height * 20.7;
           } else {
             height = height * 55.56;
           }
