@@ -83,9 +83,11 @@
                     </div>
                   </template>
                   <template slot="tab-pane-2">
-                    The PLY file is too big to load in this page, please click
-                    <a href="/library_ply" target="_blank">here </a>
-                    to view the point cloud.
+                    click<a href="/library_ply" target="_blank"> here </a>to
+                    view it
+                    <a href="/library_ply" target="_blank">
+                      <img src="/library.JPG" alt="jsc" />
+                    </a>
                   </template>
                 </tabs>
               </div>
@@ -120,9 +122,10 @@
                     </div>
                   </template>
                   <template slot="tab-pane-2">
-                    The PLY file is too big to load in this page, please click
-                    <a href="/jsc_ply" target="_blank">here </a>
-                    to view the point cloud.
+                    click<a href="/jsc_ply" target="_blank"> here </a>to view it
+                    <a href="/jsc_ply" target="_blank">
+                      <img src="/jsc.JPG" alt="jsc" />
+                    </a>
                   </template>
                 </tabs>
               </div>
@@ -518,7 +521,7 @@ export default {
   },
   name: "ThreeTest",
   methods: {
-    init: function () {
+    init: function() {
       let container = document.getElementById("container");
 
       this.scene = new Scene();
@@ -554,7 +557,7 @@ export default {
       // });
 
       let that = this;
-      gltf_loader.load("/models/图书馆.glb", function (gltf) {
+      gltf_loader.load("/models/图书馆.glb", function(gltf) {
         const scene = gltf.scene || gltf.scenes[0];
         const clips = gltf.animations || [];
 
@@ -606,7 +609,7 @@ export default {
 
       rgbe_loader
         .setDataType(UnsignedByteType)
-        .load("/environment/venice_sunset_1k.hdr", function (texture) {
+        .load("/environment/venice_sunset_1k.hdr", function(texture) {
           var envMap = that.pmremGenerator.fromEquirectangular(texture).texture;
 
           that.scene.environment = envMap;
@@ -617,7 +620,7 @@ export default {
 
       container.appendChild(this.renderer.domElement);
     },
-    init2: function () {
+    init2: function() {
       let container2 = document.getElementById("container2");
 
       this.scene2 = new Scene();
@@ -651,7 +654,7 @@ export default {
       // });
 
       let that = this;
-      gltf_loader.load("/models/电子楼.glb", function (gltf) {
+      gltf_loader.load("/models/电子楼.glb", function(gltf) {
         const scene = gltf.scene || gltf.scenes[0];
         const clips = gltf.animations || [];
 
@@ -702,9 +705,9 @@ export default {
 
       rgbe_loader2
         .setDataType(UnsignedByteType)
-        .load("/environment/venice_sunset_1k.hdr", function (texture2) {
-          var envMap2 =
-            that.pmremGenerator2.fromEquirectangular(texture2).texture;
+        .load("/environment/venice_sunset_1k.hdr", function(texture2) {
+          var envMap2 = that.pmremGenerator2.fromEquirectangular(texture2)
+            .texture;
 
           that.scene2.environment = envMap2;
 
@@ -714,7 +717,7 @@ export default {
 
       container2.appendChild(this.renderer2.domElement);
     },
-    animate: function () {
+    animate: function() {
       requestAnimationFrame(this.animate);
       this.renderer.autoclear = true;
       this.renderer2.autoclear = true;
@@ -723,7 +726,7 @@ export default {
       this.renderer.render(this.scene, this.defaultCamera);
       this.renderer2.render(this.scene2, this.defaultCamera2);
     },
-    switchPanel: function (index) {
+    switchPanel: function(index) {
       console.log(index);
     },
   },

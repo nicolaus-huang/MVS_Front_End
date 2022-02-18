@@ -43,12 +43,17 @@ import {
   WebGLRenderer,
   sRGBEncoding,
   Group,
-  Box3Helper
+  Box3Helper,
+  LineBasicMaterial
 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
+import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
+import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
+
+import * as THREE from 'three'
 import SpriteText from 'three-spritetext';
 
 var gltf_loader = new GLTFLoader();
@@ -101,6 +106,7 @@ export default {
   name: "ThreeTest",
   methods: {
     init: function () {
+      
       let container = document.getElementById("container");
 
       this.scene = new Scene();
@@ -159,35 +165,75 @@ export default {
             asArray.forEach((mat) => (mat.metalness = 0));
           }
         });
-        that.scene.add(scene);
-
-        // const xlabel = new SpriteText('188.2m', 3000);
-        // xlabel.color = 'orange';
-        // xlabel.position.x = -xl;
-        // xlabel.position.y = zl;
-        // xlabel.position.z = -zl;
-        // const ylabel = new SpriteText('62.0m', 3000);
-        // ylabel.color = 'orange';
-        // ylabel.position.x = -xl;
-        // ylabel.position.y = -yl;
-        // ylabel.position.z = -zl;
-        // const zlabel = new SpriteText('133.3m', 3000);
-        // zlabel.color = 'orange';
-        // zlabel.position.x = -zl;
-        // zlabel.position.y = -zl;
-        // zlabel.position.z = -zl;
-        // that.SizeInfo.add(xlabel);
-        // that.SizeInfo.add(ylabel);
-        // that.SizeInfo.add(zlabel);
         const box2 = new Box3().setFromObject(scene);
-        const {min, max} = box2;
-        const xl = Math.abs(max.x-min.x)
-        const yl = Math.abs(max.y-min.y)
-        const zl = Math.abs(max.z-min.z)
-        const helper = new Box3Helper(box2, "orange");
+        const {min, max} = box;
+        let xl = Math.abs(max.x - min.x);
+        let yl = Math.abs(max.y - min.y);
+        let zl = Math.abs(max.z - min.z);
+        const material = new LineBasicMaterial({ color: "orange" });
+        let origin = new Vector3(
+          center.x - (1 / 2) * xl,
+          0,
+          center.z - (1 / 2) * zl
+        );
+        let xd = new Vector3(
+          center.x + (1 / 2) * xl,
+          0,
+          center.z - (1 / 2) * zl
+        );
+        let yd = new Vector3(
+          center.x - (1 / 2) * xl,
+          0,
+          center.z + (1 / 2) * zl
+        );
+        let zd = new Vector3(
+          center.x - (1 / 2) * xl,
+          center.y + yl,
+          center.z - (1 / 2) * zl
+        );
+        const font_loader = new FontLoader();
+
+        font_loader.load( '/fonts/helvetiker_regular.typeface.json', function ( font ) {
+
+          let xd_text = new TextGeometry( '60m', {
+            font: font,
+            size: 0.3,
+            height: 0.005,
+          } );
+          let yd_text = new TextGeometry( '30m', {
+            font: font,
+            size: 0.3,
+            height: 0.005,
+          } );
+          let zd_text = new TextGeometry( '28m', {
+            font: font,
+            size: 0.3,
+            height: 0.005,
+          } );
+          let material2 = new LineBasicMaterial();
+          var xMesh = new THREE.Mesh(xd_text, material2);
+          var yMesh = new THREE.Mesh(yd_text, material2);
+          var zMesh = new THREE.Mesh(zd_text, material2);
+          xMesh.position.x = center.x;
+          xMesh.position.y = xd.y + 0.1;
+          xMesh.position.z = -xd.z - 1.1;
+          yMesh.position.x = yd.x;
+          yMesh.position.y = yd.y + 0.1;
+          yMesh.position.z = center.z;
+          zMesh.position.x = zd.x;
+          zMesh.position.y = yl/2;
+          zMesh.position.z = -zd.z- 1.1;
+          that.SizeInfo.add(xMesh);
+          that.SizeInfo.add(yMesh);
+          that.SizeInfo.add(zMesh);
+        } );
+
+        const helper = new Box3Helper(box, "orange");
         that.SizeInfo.add(helper);
+        
         that.SizeInfo.visible = false;
-        that.scene.add(that.SizeInfo);
+        scene.add(that.SizeInfo);
+        that.scene.add(scene);
       });
 
       const hemiLight = new HemisphereLight();

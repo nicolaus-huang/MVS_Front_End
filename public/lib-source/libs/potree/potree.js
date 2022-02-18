@@ -1,3 +1,4 @@
+var flagofele = 1;
 (function(global, factory) {
   typeof exports === "object" && typeof module !== "undefined"
     ? factory(exports)
@@ -1995,7 +1996,11 @@
               this.lengthUnitDisplay.unitspermeter; //convert to meters then to the display unit
             suffix = this.lengthUnitDisplay.code;
           }
-          distance = distance * 25.67;
+          if (flagofele) {
+            distance = distance * 25.67;
+          } else {
+            distance = distance * 55.56;
+          }
           let txtLength = Utils.addCommas(distance.toFixed(2));
           edgeLabel.setText(`${txtLength} ${suffix}`);
           edgeLabel.visible =
@@ -2104,7 +2109,11 @@
               this.lengthUnitDisplay.unitspermeter; //convert to meters then to the display unit
             suffix = this.lengthUnitDisplay.code;
           }
-          height = height * 25.67;
+          if (flagofele) {
+            height = height * 25.67;
+          } else {
+            height = height * 55.56;
+          }
           let txtHeight = Utils.addCommas(height.toFixed(2));
           let msg = `${txtHeight} ${suffix}`;
           this.heightLabel.setText(msg);
