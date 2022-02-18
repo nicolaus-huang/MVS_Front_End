@@ -10,7 +10,7 @@ npm run dev
 ```
 
 ### Reference：
-https://github.com/potree/potree  
+https://github.com/potree/potree   /src/viws/JSC_PLY.vue and /src/views/Library_PLY.vue  
 https://github.com/potree/PotreeConverter  
 https://threejs.org/  
  
