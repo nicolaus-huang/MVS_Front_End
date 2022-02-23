@@ -9,8 +9,25 @@ npm install
 npm run dev
 ```
 
+## Website:
+
+[SDU 3D Reconstruction Project](https://www.mylifemeaning.cn/)
+
+## Tech Stack:
+
+- Three.js
+- Potree.js
+- Vue.js
+
+## Example:
+
+![image-20220223094448081](https://s2.loli.net/2022/02/23/PzBqCraL4EQTNRS.png)
+
 ### Reference：
-https://github.com/potree/potree   /src/viws/JSC_PLY.vue and /src/views/Library_PLY.vue  
-https://github.com/potree/PotreeConverter  
+
+https://github.com/potree/potree
+
+https://github.com/potree/PotreeConverter 
+
 https://threejs.org/  
- 
+
