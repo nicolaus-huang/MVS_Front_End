@@ -6,8 +6,6 @@ import Library_PLY from "./views/Library_PLY.vue";
 import JSC_GLB from "./views/JSC_GLB.vue";
 import JSC_PLY from "./views/JSC_PLY.vue";
 import GLB_Footer from "./layout/GLB_Footer.vue"
-import PLY_MainNavbar from "./layout/PLY_MainNavbar.vue"
-import GLB_MainNavbar from "./layout/GLB_MainNavbar.vue"
 import MainNavbar from "./layout/MainNavbar.vue";
 import MainFooter from "./layout/MainFooter.vue";
 
@@ -29,7 +27,7 @@ export default new Router({
       name: "library_glb",
       components: {
         default: Library_GLB,
-        header: GLB_MainNavbar,
+        header: MainNavbar,
         footer: GLB_Footer
       },
       props: {
@@ -41,7 +39,7 @@ export default new Router({
       name: "jsc_glb",
       components: {
         default: JSC_GLB,
-        header: GLB_MainNavbar,
+        header: MainNavbar,
         footer: GLB_Footer
       },
       props: {
@@ -53,7 +51,7 @@ export default new Router({
       name: "library_ply",
       components: {
         default: Library_PLY,
-        header: PLY_MainNavbar,
+        header: MainNavbar,
         footer: GLB_Footer
       },
       props: {
@@ -65,7 +63,7 @@ export default new Router({
       name: "jsc_ply",
       components: {
         default: JSC_PLY,
-        header: PLY_MainNavbar,
+        header: MainNavbar,
         footer: GLB_Footer
       },
       props: {

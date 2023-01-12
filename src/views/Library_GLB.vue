@@ -1,25 +1,17 @@
 <template>
   <div class="threejs-wrapper">
     <div id="container" />
-    <dat-gui
-      closeText="Close controls"
-      openText="Open controls"
-      closePosition="bottom"
-      style="display: absolute; top: 80vh"
-    >
-      <dat-folder label="Model">
-        <dat-boolean v-model="SizeInfo.visible" label="Show Size" />
-        <dat-boolean
-          v-if="controls != null"
-          v-model="controls.autoRotate"
-          label="autoRotate"
-        />
-      </dat-folder>
-    </dat-gui>
+    <dat-gui closeText="Close controls" openText="Open controls" closePosition="bottom" style="display:absolute; top: 80vh">
+    <dat-folder label="Model">
+      <dat-boolean v-model="SizeInfo.visible" label="Show Size"/>
+      <dat-boolean v-if="controls != null" v-model="controls.autoRotate" label="autoRotate"/>
+    </dat-folder>
+  </dat-gui>
   </div>
 </template>
 
 <style lang="scss" scoped>
+
 .threejs-wrapper {
   overflow: hidden;
   width: 100vw;
@@ -42,17 +34,13 @@ import {
   WebGLRenderer,
   sRGBEncoding,
   Group,
-  Box3Helper,
-  LineBasicMaterial,
-  
+  Box3Helper
 } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
-import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
-import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
-// import SpriteText from 'three-spritetext';
+import SpriteText from 'three-spritetext';
 
 var gltf_loader = new GLTFLoader();
 var dracoloader = new DRACOLoader();
@@ -91,7 +79,7 @@ export default {
       defaultCamera: null,
       renderer: null,
       SizeInfo: new Group(),
-      controls: null,
+      controls: null
     };
   },
   computed: {
@@ -130,7 +118,7 @@ export default {
         this.defaultCamera,
         this.renderer.domElement
       );
-      //   this.controls.autoRotate = true;
+    //   this.controls.autoRotate = true;
       this.controls.autoRotateSpeed = 2;
       this.controls.screenSpacePanning = true;
 
@@ -162,93 +150,36 @@ export default {
           }
         });
         that.scene.add(scene);
-        var box2 = new Box3().setFromObject(scene);
-        const { min, max } = box2;
-        let zl = Math.abs(max.z - min.z);
-        let xl = Math.abs(max.x - min.x);
-        let yl = Math.abs(max.y - min.y);
-        const material = new LineBasicMaterial({ color: "orange" });
-        let origin = new Vector3(
-          center.x - (1 / 2) * xl,
-          3000,
-          center.z - (1 / 2) * zl
-        );
-        let xd = new Vector3(
-          center.x + (1 / 2) * xl,
-          3000,
-          center.z - (1 / 2) * zl
-        );
-        let yd = new Vector3(
-          center.x - (1 / 2) * xl,
-          3000,
-          center.z + (1 / 2) * zl
-        );
-        let zd = new Vector3(
-          center.x - (1 / 2) * xl,
-          center.y + yl,
-          center.z - (1 / 2) * zl
-        );
-        const font_loader = new FontLoader();
 
-        font_loader.load( '/fonts/helvetiker_regular.typeface.json', function ( font ) {
-
-          let xd_text = new TextGeometry( '200m', {
-            font: font,
-            size: 3000,
-            height: 5,
-            curveSegments: 12,
-            bevelEnabled: true,
-            bevelThickness: 10,
-            bevelSize: 8,
-            bevelOffset: 0,
-            bevelSegments: 5
-          } );
-          let yd_text = new TextGeometry( '115m', {
-            font: font,
-            size: 3000,
-            height: 5,
-            curveSegments: 12,
-            bevelEnabled: true,
-            bevelThickness: 10,
-            bevelSize: 8,
-            bevelOffset: 0,
-            bevelSegments: 5
-          } );
-          let zd_text = new TextGeometry( '65m', {
-            font: font,
-            size: 3000,
-            height: 5,
-            curveSegments: 12,
-            bevelEnabled: true,
-            bevelThickness: 10,
-            bevelSize: 8,
-            bevelOffset: 0,
-            bevelSegments: 5
-          } );
-          let material2 = new LineBasicMaterial();
-          var xMesh = new THREE.Mesh(xd_text, material2);
-          var yMesh = new THREE.Mesh(yd_text, material2);
-          var zMesh = new THREE.Mesh(zd_text, material2);
-          xMesh.position.x = center.x;
-          xMesh.position.y = xd.y + 1000;
-          xMesh.position.z = -xd.z;
-          yMesh.position.x = yd.x;
-          yMesh.position.y = yd.y / 2 + 2000;
-          yMesh.position.z = center.z;
-          zMesh.position.x = zd.x;
-          zMesh.position.y = yl / 2;
-          zMesh.position.z = -zd.z;
-          that.SizeInfo.add(xMesh);
-          that.SizeInfo.add(yMesh);
-          that.SizeInfo.add(zMesh);
-        } );
+        // const xlabel = new SpriteText('188.2m', 3000);
+        // xlabel.color = 'orange';
+        // xlabel.position.x = -xl;
+        // xlabel.position.y = zl;
+        // xlabel.position.z = -zl;
+        // const ylabel = new SpriteText('62.0m', 3000);
+        // ylabel.color = 'orange';
+        // ylabel.position.x = -xl;
+        // ylabel.position.y = -yl;
+        // ylabel.position.z = -zl;
+        // const zlabel = new SpriteText('133.3m', 3000);
+        // zlabel.color = 'orange';
+        // zlabel.position.x = -zl;
+        // zlabel.position.y = -zl;
+        // zlabel.position.z = -zl;
+        // that.SizeInfo.add(xlabel);
+        // that.SizeInfo.add(ylabel);
+        // that.SizeInfo.add(zlabel);
+        const box2 = new Box3().setFromObject(scene);
+        const {min, max} = box2;
+        const xl = Math.abs(max.x-min.x)
+        const yl = Math.abs(max.y-min.y)
+        const zl = Math.abs(max.z-min.z)
         const helper = new Box3Helper(box2, "orange");
         that.SizeInfo.add(helper);
-
         that.SizeInfo.visible = false;
-
         that.scene.add(that.SizeInfo);
       });
+
 
       const hemiLight = new HemisphereLight();
       const light1 = new AmbientLight(0xffffff, 0.3);
@@ -310,4 +241,3 @@ export default {
   );
 }
 </style>
->

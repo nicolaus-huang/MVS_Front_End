@@ -42,8 +42,6 @@ export default {
     window.viewer = new Potree.Viewer(
       document.getElementById("potree_render_area")
     );
-    flagofele = 0;
-
     viewer.setEDLEnabled(true);
     viewer.setFOV(60);
     viewer.setPointBudget(2_000_000);
@@ -52,25 +50,25 @@ export default {
     viewer.setBackground("gradient"); // ["skybox", "gradient", "black", "white"];
     viewer.setDescription(``);
     viewer.loadSettingsFromURL();
-    viewer.setDescription(
-      "<h2>图书馆<h2/><p>您可以在此测量距离,高度,角度<p/><p>窗户数目:730只<br/>最长长度:200m 最宽宽度:115m 最高高度:65m<p/>"
-    );
     // viewer.setDescription(
-    //   "<h2>图书馆<h2/><p>窗户数目:730只<br/>最长长度:200m 最宽宽度:115m 最高高度:65m<p/>"
+    //   "<h2>图书馆<h2/><p>您可以在此测量距离,高度,角度<p/><p>窗户数目:730只<br/>最长长度:133.3m 最宽宽度:188.2m 最高高度:62.0m<p/>"
     // );
-    viewer.loadGUI(() => {
-      viewer.setLanguage("en");
-      $("#menu_appearance")
-        .next()
-        .show();
-      $("#menu_tools")
-        .next()
-        .show();
-      $("#menu_clipping")
-        .next()
-        .show();
-      viewer.toggleSidebar();
-    });
+    viewer.setDescription(
+      "<h2>图书馆<h2/><p>窗户数目:730只<br/>最长长度:133.3m 最宽宽度:188.2m 最高高度:62.0m<p/>"
+    );
+    // viewer.loadGUI(() => {
+    //   viewer.setLanguage("en");
+    //   $("#menu_appearance")
+    //     .next()
+    //     .show();
+    //   $("#menu_tools")
+    //     .next()
+    //     .show();
+    //   $("#menu_clipping")
+    //     .next()
+    //     .show();
+    //   // viewer.toggleSidebar();
+    // });
 
     Potree.loadPointCloud(
       "lib-source/pointclouds/library/cloud.js",
