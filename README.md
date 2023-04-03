@@ -11,7 +11,7 @@ npm run dev
 
 ## Website:
 
-[SDU 3D Reconstruction Project](https://www.wukon.technology/)
+[SDU 3D Reconstruction Project](https://sdureconstruction.wudao.blog/)
 
 ## Tech Stack:
 
